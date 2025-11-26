@@ -1,0 +1,495 @@
+# MediChain - Complete Setup and Usage Guide
+
+## 📋 Table of Contents
+
+1. [Prerequisites](#prerequisites)
+2. [Initial Setup](#initial-setup)
+3. [Database Setup](#database-setup)
+4. [Blockchain Setup (Ganache)](#blockchain-setup-ganache)
+5. [Deploy Smart Contracts](#deploy-smart-contracts)
+6. [Start Backend Server](#start-backend-server)
+7. [Start Frontend Application](#start-frontend-application)
+8. [Using the Application](#using-the-application)
+9. [Troubleshooting](#troubleshooting)
+
+---
+
+## Prerequisites
+
+Before starting, make sure you have the following installed:
+
+1. **Node.js** (v14 or higher) - [Download here](https://nodejs.org/)
+2. **MySQL** - [Download here](https://dev.mysql.com/downloads/)
+3. **Ganache** (Desktop App) - [Download here](https://trufflesuite.com/ganache/)
+4. **MetaMask** (Browser Extension) - [Install here](https://metamask.io/)
+5. **Git** (optional, for cloning) - [Download here](https://git-scm.com/)
+
+---
+
+## Initial Setup
+
+### Step 1: Navigate to Project Directory
+
+```bash
+cd "/Users/dhruvnakum/SEM 3/Blockchain/DigitalIdentityVerifcation_DApp"
+```
+
+### Step 2: Install Root Dependencies
+
+```bash
+npm install
+```
+
+### Step 3: Install Backend Dependencies
+
+```bash
+cd my-app-backend
+npm install
+cd ..
+```
+
+### Step 4: Install Frontend Dependencies
+
+```bash
+cd frontend
+npm install
+cd ..
+```
+
+---
+
+## Database Setup
+
+### Step 1: Start MySQL Server
+
+Make sure MySQL is running on your system.
+
+**On macOS:**
+
+```bash
+# Check if MySQL is running
+brew services list
+# Or start it manually
+brew services start mysql
+```
+
+**On Windows:**
+
+- Open Services and start MySQL service
+- Or use MySQL Workbench
+
+### Step 2: Create Database and Tables
+
+**Option A: Using the Setup Script (Recommended)**
+
+```bash
+cd my-app-backend
+node setup-database.js
+cd ..
+```
+
+**Option B: Manual Setup**
+
+```bash
+mysql -u root -p < database/schema.sql
+```
+
+When prompted, enter your MySQL root password.
+
+### Step 3: Configure Database Credentials
+
+Edit the `.env` file in `my-app-backend` directory:
+
+```bash
+cd my-app-backend
+nano .env
+# or use any text editor
+```
+
+Update with your MySQL credentials:
+
+```env
+DB_HOST=localhost
+DB_USER=root
+DB_PASS=your_mysql_password
+DB_NAME=digital_identity_verification
+PORT=5001
+```
+
+Save and close the file.
+
+---
+
+## Blockchain Setup (Ganache)
+
+### Step 1: Start Ganache
+
+1. Open the Ganache desktop application
+2. Click "New Workspace" or "Quickstart"
+3. Make sure it's running on:
+   - **Host:** 127.0.0.1
+   - **Port:** 7545
+   - **Network ID:** 1337 (or 5777 - both are supported)
+
+### Step 2: Get Your Account Private Key
+
+1. In Ganache, click on the key icon next to any account
+2. Copy the private key (you'll need this for MetaMask)
+
+### Step 3: Configure MetaMask
+
+1. **Install MetaMask** (if not already installed)
+
+   - Chrome: [Chrome Web Store](https://chrome.google.com/webstore/detail/metamask)
+   - Firefox: [Firefox Add-ons](https://addons.mozilla.org/firefox/addon/ether-metamask/)
+
+2. **Create/Unlock MetaMask Wallet**
+
+   - Click the MetaMask extension icon
+   - Create a new wallet or import existing one
+
+3. **Add Ganache Network to MetaMask**
+
+   - Click the network dropdown (usually shows "Ethereum Mainnet")
+   - Click "Add Network" or "Add Network Manually"
+   - Enter the following details:
+     - **Network Name:** Ganache Local
+     - **RPC URL:** http://127.0.0.1:7545
+     - **Chain ID:** 1337 (or 5777 if that's what Ganache shows)
+     - **Currency Symbol:** ETH
+   - Click "Save"
+
+4. **Import Ganache Account to MetaMask**
+   - Click the account icon (circle) in MetaMask
+   - Click "Import Account"
+   - Paste the private key you copied from Ganache
+   - Click "Import"
+   - You should now see ETH balance from Ganache
+
+---
+
+## Deploy Smart Contracts
+
+### Step 1: Compile Contracts
+
+```bash
+# Make sure you're in the root directory
+truffle compile
+```
+
+You should see:
+
+```
+Compiling your contracts...
+> Compiling ./contracts/MediChain.sol
+> Artifacts written to /build/contracts
+Compiled successfully!
+```
+
+### Step 2: Deploy Contracts
+
+```bash
+truffle migrate --reset
+```
+
+This will:
+
+- Deploy the MediChain contract to Ganache
+- Update `frontend/src/contract.json` with the contract address
+- Update `my-app-backend/contract.json` with the contract address
+
+**Important:** Note the contract address from the output. It will look like:
+
+```
+Contract deployed at address: 0x...
+```
+
+---
+
+## Start Backend Server
+
+### Step 1: Navigate to Backend Directory
+
+```bash
+cd my-app-backend
+```
+
+### Step 2: Start the Server
+
+```bash
+node server.js
+```
+
+You should see:
+
+```
+Connected to the MySQL database.
+Server running on port 5001
+```
+
+**Keep this terminal window open!** The backend must be running for the app to work.
+
+---
+
+## Start Frontend Application
+
+### Step 1: Open a NEW Terminal Window
+
+**Important:** Keep the backend server running in the first terminal, open a new terminal for the frontend.
+
+### Step 2: Navigate to Frontend Directory
+
+```bash
+cd "/Users/dhruvnakum/SEM 3/Blockchain/DigitalIdentityVerifcation_DApp/frontend"
+```
+
+### Step 3: Start React Development Server
+
+```bash
+npm start
+```
+
+This will:
+
+- Start the React development server
+- Automatically open your browser to `http://localhost:3000`
+- If it doesn't open automatically, manually navigate to `http://localhost:3000`
+
+---
+
+## Using the Application
+
+### Step 1: Connect MetaMask
+
+When you first open the app:
+
+1. The app will detect MetaMask
+2. MetaMask will prompt you to connect
+3. Click "Connect" or "Next"
+4. Select your Ganache account
+5. Click "Connect"
+
+### Step 2: Register as a User
+
+#### Register as a Patient:
+
+1. On the login page, click "Switch to Register"
+2. Enter:
+   - **Username:** Your name (e.g., "John Doe")
+   - **Password:** Choose a password
+   - **Role:** Select "Patient"
+3. Click "Register"
+4. After successful registration, click "Switch to Login"
+5. Log in with your credentials
+
+#### Register as a Doctor/Hospital:
+
+1. Make sure MetaMask is connected with your Ganache account
+2. Click "Switch to Register"
+3. Enter:
+   - **Username:** Hospital/Doctor name (e.g., "City Hospital")
+   - **Password:** Choose a password
+   - **Role:** Select "Doctor/Hospital"
+4. Click "Register"
+   - MetaMask will prompt you to confirm the transaction
+   - Click "Confirm" to register on blockchain
+5. After successful registration, log in
+
+#### Register as an Insurance Company:
+
+1. Make sure MetaMask is connected
+2. Click "Switch to Register"
+3. Enter:
+   - **Username:** Insurance company name (e.g., "Health Insurance Co")
+   - **Password:** Choose a password
+   - **Role:** Select "Insurance Company"
+4. Click "Register"
+   - Confirm the MetaMask transaction
+5. After successful registration, log in
+
+### Step 3: Using Patient Portal
+
+Once logged in as a Patient:
+
+1. **View Available Doctors/Hospitals**
+
+   - You'll see cards showing registered doctors/hospitals
+
+2. **Upload Medical Record**
+
+   - Click "Upload Medical Record" on a doctor/hospital card
+   - Enter your name
+   - Select a medical file (PDF, DOC, images)
+   - Click "Upload Medical Record"
+   - The file will be encrypted and uploaded to IPFS
+   - Confirm the MetaMask transaction
+   - Your medical record NFT will be minted!
+
+3. **View Your Records**
+
+   - Scroll down to see "Your Medical Record NFTs"
+   - Each record has a unique Token ID
+
+4. **Check Verification Status**
+   - View verification status for each record
+   - See if it's verified by doctor and insurance
+
+### Step 4: Using Doctor Portal
+
+Once logged in as a Doctor/Hospital:
+
+1. **View Patient Records**
+
+   - You can see medical records that have been uploaded
+
+2. **Request Insurance Verification**
+
+   - Select a patient record
+   - Request verification from an insurance company
+
+3. **Verify Records**
+   - After insurance verification, you can verify the record yourself
+
+### Step 5: Using Insurance Portal
+
+Once logged in as an Insurance Company:
+
+1. **View Verification Requests**
+
+   - See requests from doctors for record verification
+
+2. **Verify Medical Records**
+   - Review and verify patient medical records
+   - This enables claim processing
+
+---
+
+## Troubleshooting
+
+### Problem: "Cannot find module" errors
+
+**Solution:**
+
+```bash
+# Make sure all dependencies are installed
+cd my-app-backend && npm install
+cd ../frontend && npm install
+```
+
+### Problem: Database connection error
+
+**Solution:**
+
+1. Check MySQL is running: `brew services list` (macOS) or check Services (Windows)
+2. Verify `.env` file has correct credentials
+3. Make sure database exists: `mysql -u root -p -e "SHOW DATABASES;"`
+
+### Problem: "Contract not deployed" error
+
+**Solution:**
+
+1. Make sure Ganache is running
+2. Redeploy contracts: `truffle migrate --reset`
+3. Check MetaMask is on the correct network (Ganache - Chain ID 1337 or 5777)
+
+### Problem: MetaMask connection issues
+
+**Solution:**
+
+1. Make sure MetaMask is unlocked
+2. Check you're on the Ganache network
+3. Refresh the browser page
+4. Clear browser cache if needed
+
+### Problem: "Network ID mismatch" error
+
+**Solution:**
+
+1. Check Ganache network ID (should be 1337 or 5777)
+2. Update MetaMask network to match
+3. Redeploy contracts if needed
+
+### Problem: Backend server won't start
+
+**Solution:**
+
+1. Check if port 5001 is already in use
+2. Verify database connection in `.env`
+3. Make sure MySQL is running
+4. Check for errors in the terminal
+
+### Problem: Frontend won't compile
+
+**Solution:**
+
+1. Clear node_modules and reinstall:
+   ```bash
+   cd frontend
+   rm -rf node_modules package-lock.json
+   npm install
+   ```
+2. Check for syntax errors in console
+
+### Problem: Transactions failing in MetaMask
+
+**Solution:**
+
+1. Make sure you have ETH in your Ganache account
+2. Check gas limit (should be sufficient)
+3. Make sure you're on the correct network
+4. Try resetting MetaMask account (Settings > Advanced > Reset Account)
+
+---
+
+## Quick Start Checklist
+
+- [ ] MySQL installed and running
+- [ ] Ganache installed and running on port 7545
+- [ ] MetaMask installed and connected to Ganache network
+- [ ] Ganache account imported to MetaMask
+- [ ] Database created and tables set up
+- [ ] `.env` file configured with database credentials
+- [ ] All dependencies installed (root, backend, frontend)
+- [ ] Smart contracts compiled and deployed
+- [ ] Backend server running on port 5001
+- [ ] Frontend server running on port 3000
+- [ ] Browser opened to http://localhost:3000
+
+---
+
+## Need Help?
+
+If you encounter any issues not covered here:
+
+1. Check the terminal/console for error messages
+2. Verify all services are running (MySQL, Ganache, Backend, Frontend)
+3. Check browser console (F12) for frontend errors
+4. Review the README.md for additional information
+
+---
+
+## Summary of Commands
+
+```bash
+# Setup
+npm install
+cd my-app-backend && npm install
+cd ../frontend && npm install
+
+# Database
+cd my-app-backend && node setup-database.js
+
+# Blockchain
+truffle compile
+truffle migrate --reset
+
+# Start Backend (Terminal 1)
+cd my-app-backend
+node server.js
+
+# Start Frontend (Terminal 2)
+cd frontend
+npm start
+```
+
+Happy coding! 🏥✨
