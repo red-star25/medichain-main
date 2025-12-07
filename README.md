@@ -99,7 +99,7 @@ The design aligns with emerging global standards for patient data portability an
 8. **Access Application**: Open `http://localhost:3000` in your browser
 
 ## Repository Link
-https://github.com/DheerajKommineni/DigitalIdentityVerifcation_DApp.git
+[MediChain](https://github.com/red-star25/medichain-main)
 
 ## Built From Scratch
 This project was developed entirely from scratch. No existing codebase was used or modified. All components, including the smart contracts, frontend, and backend, were created independently for this project.
