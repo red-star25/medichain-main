@@ -1,21 +1,9 @@
 # MediChain - Decentralized Health Record Management System
 
 ## Team Members
-- Sri Hari Dheeraj Kommineni
-  - CWID: 885177196
-  - Email: dheerajkommineni@csu.fullerton.edu
-- Tarun Sai Vuppala
-  - CWID: 827778861
-  - Email: tarunsai@csu.fullerton.edu
-- Hemanth Naidu Karnataka
-  - CWID: 885177238
-  - Email: hemanth_karnataka@csu.fullerton.edu
-- Ashish Kottakota
-  - CWID: 878640879
-  - Email: kottakotaashish@csu.fullerton.edu
-- Sai Sirisha Surapaneni
-  - CWID: 885176834
-  - Email: siri23@csu.fullerton.edu
+1. Anuj Chandrakant More  - 884437708  - anuj.more@csu.fullerton.edu   - [GitHub](https://github.com/OfficialAnujMore)
+2. Dhruv Jitendrabhai Nakum - 807483318  - dhruvnakum@csu.fullerton.edu    - [GitHub](https://github.com/red-star25)
+3. Ishan Jawade           - 885186304  - ishanjawade@csu.fullerton.edu - [GitHub](https://github.com/IshanJawade)
 
 ## Why We Chose This Topic
 
