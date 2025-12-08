@@ -1,13 +1,14 @@
 # MediChain - Decentralized Health Record Management System
 
 ## Team Members
-1. Anuj Chandrakant More  - 884437708  - anuj.more@csu.fullerton.edu   - [GitHub](https://github.com/OfficialAnujMore)
-2. Dhruv Jitendrabhai Nakum - 807483318  - dhruvnakum@csu.fullerton.edu    - [GitHub](https://github.com/red-star25)
-3. Ishan Jawade           - 885186304  - ishanjawade@csu.fullerton.edu - [GitHub](https://github.com/IshanJawade)
+
+1. Anuj Chandrakant More - 884437708 - anuj.more@csu.fullerton.edu - [GitHub](https://github.com/OfficialAnujMore)
+2. Dhruv Jitendrabhai Nakum - 807483318 - dhruvnakum@csu.fullerton.edu - [GitHub](https://github.com/red-star25)
+3. Ishan Jawade - 885186304 - ishanjawade@csu.fullerton.edu - [GitHub](https://github.com/IshanJawade)
 
 ## Why We Chose This Topic
 
-Our team wanted to explore a meaningful real-world application of blockchain beyond finance. The healthcare industry faces persistent challenges in securely managing and sharing patient data across multiple entities such as hospitals, clinics, and insurance providers. Traditional systems are centralized, creating risks of data breaches, limited interoperability, and lack of transparency for patients.
+Our team wanted to explore a meaningful real-world application of blockchain beyond. The healthcare industry faces persistent challenges in securely managing and sharing patient data across multiple entities such as hospitals, clinics, and insurance providers. Traditional systems are centralized, creating risks of data breaches, limited interoperability, and lack of transparency for patients.
 
 We chose this topic because blockchain technology offers a transparent, tamper-proof, and decentralized way to address these issues. By building MediChain, we aim to create a solution where patients regain ownership of their health records and can grant or revoke access through smart contracts. This idea aligns with our interest in blockchain for social impact, data privacy, and secure digital ecosystems.
 
@@ -19,15 +20,79 @@ Every interaction—upload, access request, or approval—is recorded on the blo
 
 ## Key Features
 
-1. **Patient Registration and Encrypted Data Upload to IPFS**: Patients can securely upload their medical records, which are encrypted and stored on IPFS (InterPlanetary File System) for distributed, censorship-resistant storage.
+### 1. Multi-Role System
 
-2. **Doctor and Hospital Access Requests**: Healthcare providers can request access to patient medical records through smart contracts, ensuring transparent and auditable access requests.
+- **Role-Based Authentication and Access Control**: Comprehensive authentication system supporting multiple user roles (Patient, Doctor, Insurance Provider)
 
-3. **On-Chain Permission Granting and Revocation**: Patients maintain complete control over their data, with the ability to grant or revoke access permissions at any time through blockchain transactions.
+- **Granular Permissions**: Each role has specific access rights and capabilities tailored to their responsibilities
 
-4. **Insurance Verification**: Insurance companies can verify medical history before claim approval, with all verification activities recorded on the blockchain.
+- **Secure Role Management**: Role assignment and verification through blockchain-based identity management
 
-5. **Immutable Audit Trail**: Every access activity, upload, request, or approval is permanently recorded on the blockchain, ensuring complete transparency and accountability.
+### 2. Blockchain Integration
+
+- **NFT Minting for Medical Records**: Each medical record is minted as a unique NFT, ensuring authenticity and ownership
+
+- **Immutable Audit Trails**: All transactions and access requests are permanently recorded on the blockchain for complete transparency
+
+- **Event Logging**: Real-time blockchain event emission for critical actions (uploads, access grants, verifications)
+
+- **Smart Contract-Based Permissions**: Decentralized access control managed through Ethereum smart contracts
+
+### 3. IPFS File Storage
+
+- **Encrypted Medical Records**: Patient files are encrypted before upload, ensuring privacy and security
+
+- **Distributed Storage**: Leverages IPFS (via Pinata) for censorship-resistant, distributed file storage
+
+- **Permanent Availability**: Files remain accessible and cannot be tampered with or removed by centralized authorities
+
+- **Hash-Based Verification**: IPFS content addressing ensures data integrity
+
+### 4. Verification Workflow
+
+- **Multi-Step Validation Process**:
+
+  - Patient uploads medical records
+
+  - Doctor requests access to records
+
+  - Insurance provider verifies and validates
+
+  - Doctor reviews and approves/rejects
+
+- **Real-Time Status Tracking**: Live updates on verification progress with color-coded status indicators
+
+- **Transparent Request Management**: All parties can track the status of access requests and approvals
+
+### 5. Dashboard Interface
+
+- **Comprehensive Statistics**: Role-specific dashboards displaying relevant metrics and analytics
+
+- **Activity Monitoring**: Real-time visualization of system activities and transactions
+
+- **User-Friendly Design**: Intuitive interface for managing records, requests, and permissions
+
+- **Responsive Layout**: Accessible across desktop and mobile devices
+
+### 6. Security Features
+
+- **Password Hashing**: Secure password storage using industry-standard hashing algorithms
+
+- **Encrypted Data Transmission**: All sensitive data transmitted over secure channels
+
+- **MetaMask Integration**: Cryptographic wallet authentication for enhanced security
+
+- **Access Control Lists**: Granular permission management at the smart contract level
+
+### 7. Database Management
+
+- **MySQL Integration**: Reliable relational database for storing user profiles and metadata
+
+- **Efficient Data Retrieval**: Indexed queries for fast access to user information
+
+- **Off-Chain Data Optimization**: Strategic balance between on-chain and off-chain storage for cost efficiency
+
+- **Transaction Metadata**: Storing pointers to IPFS files and blockchain transaction references
 
 ## Technology Stack
 
@@ -51,14 +116,17 @@ The design aligns with emerging global standards for patient data portability an
 ## How to Run the Project
 
 ### 📖 For Detailed Instructions
+
 **See [SETUP_GUIDE.md](./SETUP_GUIDE.md) for a complete step-by-step guide with troubleshooting.**
 
 ### ⚡ Quick Start
+
 **See [QUICK_START.md](./QUICK_START.md) for a 5-minute setup guide.**
 
 ### Basic Setup (Summary)
 
 1. **Install Dependencies**:
+
    ```bash
    npm install
    cd my-app-backend && npm install && cd ..
@@ -66,6 +134,7 @@ The design aligns with emerging global standards for patient data portability an
    ```
 
 2. **Setup Database**:
+
    ```bash
    cd my-app-backend
    node setup-database.js
@@ -75,22 +144,26 @@ The design aligns with emerging global standards for patient data portability an
 3. **Start Ganache** (Desktop App) on port 7545
 
 4. **Configure MetaMask**:
+
    - Add Ganache network (Chain ID: 1337 or 5777)
    - Import account from Ganache
 
 5. **Deploy Contracts**:
+
    ```bash
    truffle compile
    truffle migrate --reset
    ```
 
 6. **Start Backend** (Terminal 1):
+
    ```bash
    cd my-app-backend
    node server.js
    ```
 
 7. **Start Frontend** (Terminal 2):
+
    ```bash
    cd frontend
    npm start
@@ -99,7 +172,9 @@ The design aligns with emerging global standards for patient data portability an
 8. **Access Application**: Open `http://localhost:3000` in your browser
 
 ## Repository Link
+
 [MediChain](https://github.com/red-star25/medichain-main)
 
 ## Built From Scratch
+
 This project was developed entirely from scratch. No existing codebase was used or modified. All components, including the smart contracts, frontend, and backend, were created independently for this project.
